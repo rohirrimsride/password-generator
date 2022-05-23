@@ -2,67 +2,81 @@
 // using this comment type for explaining functions and variables
 /* Pseudocode */
 
-var passwordCharactersLetters = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
-var passwordCharactersNumbers = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
-var passwordCharactersSpecial = ["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@$%&*-+"];
+var passwordCharactersLetters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz".split("");
+var passwordCharactersNumbers = "9AaB8bCc0DdE7eF5f1GgH6hIi2JjK9kLl3MmN0nOo4PpQ1qRr5SsT2tUu6VvW3wXx7Yy4Zz8".split("");
+var passwordCharactersSpecial = "9A!aB8bCc@0D(dE7$eF5%f1Gg)&H6h*Ii2J_jK9k-Ll3+MmN!0nO@o4P$pQ%1qR&r5S*sT2_tUu6-VvW+3wXx7Y(y4Z)z8".split("");
+//var passwordLength
+//var passwordType
 
-var randomItem = function() {
-
-}
-
-function generatePassword() {
+function generatePassword(passwordLength, passwordType) {
+  //debugger;
   
-  passwordLengthHandler();
-  // for (var i = 0; i < passwordLength.length; i++) {
+  if (passwordType === 1) {
+    //debugger;
+    for (var i = 0; i < passwordLength; i++) {
 
-
-  // writePassword();
-};
-
-var passwordLengthHandler = function () {
-// debugger;
-  var passwordLength = window.prompt("What length would you like your password? Choose a number between 8 and 128.");
-      console.log(passwordLength);
+      randomIndex = (Math.floor(Math.random() * passwordCharactersLetters.length));
+      console.log(randomIndex);
+      
+      var password = passwordCharactersLetters[randomIndex]
+      console.log(password);
+      
+    }
+    writePassword(password);
+    //return password; 
+  }
   
-    // checks input, if null return to main screen
-    if (passwordLength === null) {
-      return generateBtn.addEventListener("click", writePassword);  
-    }  // takes input and changes it to integer then compares to parameters 
-    passwordLength = parseInt(passwordLength);
-    console.log(passwordLength);
-    if (passwordLength >= 8 && passwordLength <= 128) {
-      /* How do I pass the passwordLength to a selector that will randomly pick the correct number of characters from the passwordCharacters array? */
-    passwordTypeHandler();
-    } else {  // if password doesn't meet above parameters alert and retry
-    window.alert("Please select a number from 8 to 128.");
-    // passwordLength();
-    return passwordLengthHandler();
+
+  if (passwordType === 2) {
+    for (var i = 0; i < passwordLength; i++) {
+
+      randomIndex = (Math.floor(Math.random() * passwordCharactersNumbers.length));
+      console.log(randomIndex);
+      
+      var password = passwordCharactersNumbers[randomIndex]
+      console.log(password);
+      
+    }
+    writePassword(password);   
+  }
+
+  if (passwordType === 3) {
+    for (var i = 0; i < passwordLength; i++) {
+
+      randomIndex = (Math.floor(Math.random() * passwordCharactersSpecial.length));
+      console.log(randomIndex);
+      
+      var password = passwordCharactersSpecial[randomIndex]
+      console.log(password);
+
+    }
+    writePassword(password);
   }
 };
 
-var passwordTypeHandler = function() {
-
-  // asks to define password criteria, UPPER and lower case letters OR letters and numbers OR letters, numbers and special characters
-  // This will determine which array to randomly generate the password from
-  var passwordType = window.prompt("What characters would you like your password to contain? Select 1 for UPPER and lower case letters, select 2 for letters AND numbers, select 3 for letters AND numbers AND special characters.")
-    console.log(passwordType);
-
-    passwordType = parseInt(passwordType);
-    /* Figure out how to pass criteria to actual password generation. */
-    // use switch case to select different arrays depending on input
-    console.log(passwordType);
-    switch (passwordType) {
-
-      case 1: 
-          // connects to randomizing function for passwordCharactersLetters
-      case 2:
-          // connects to randomizing function for passwordCharactersNumbers
-      case 3: 
-          // connects to randomizing function for passwordCharactersSpecial
-      
+function passwordCriteriaHandler() {
+//debugger;
+  passwordLength = window.prompt("What length would you like your password? Choose a number between 8 and 128.");
+    // checks input, if null return to main screen
+    if (passwordLength === null) {
+      return generateBtn.addEventListener("click", passwordCriteriaHandler);  
+    }  
     
-      window.alert("You must Select 1 for UPPER and lower case letters; Select 2 for letters AND numbers; or Select 3 for letters, numbers AND special characters.");
-      return passwordTypeHandler();
+    // takes input and changes it to integer then compares to parameters in the if statement
+    passwordLength = parseInt(passwordLength);
+    if (passwordLength <= 7 || passwordLength >= 129){  // if password is outside parameters alert and retry
+      window.alert("Please select a number from 8 to 128.");
+      passwordCriteriaHandler();
+    }
+  
+  passwordType = window.prompt("What characters would you like your password to contain? Select 1 for UPPER and lower case letters, select 2 for letters AND numbers, select 3 for letters AND numbers AND special characters.")
+    passwordType = parseInt(passwordType);
+  
+    if (passwordType === 1 || passwordType === 2 || passwordType === 3) {
+      generatePassword(passwordLength, passwordType);
+    } else {
+      window.alert("You must Select 1 for UPPER AND lower case letters;  Select 2 for letters AND numbers;  or Select 3 for letters AND numbers AND special characters.");
+      passwordCriteriaHandler(8);
     }
 };
 
@@ -72,13 +86,14 @@ var passwordTypeHandler = function() {
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
+function writePassword(password) {
+
+  //var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
-}
+};
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", passwordCriteriaHandler);//writePassword);
