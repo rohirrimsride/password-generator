@@ -18,7 +18,7 @@ function generatePassword(passwordLength, passwordType) {
       
       var password = passwordCharactersLetters[randomIndex]
       console.log(password);
-      
+      window.alert("Your password is: " + password)
     }
     writePassword(password);
   }
@@ -31,7 +31,7 @@ function generatePassword(passwordLength, passwordType) {
       
       var password = passwordCharactersNumbers[randomIndex]
       console.log(password);
-      
+      window.alert("Your password is: " + password)
     }
     writePassword(password);   
   }
@@ -46,7 +46,7 @@ function generatePassword(passwordLength, passwordType) {
 
       var password = passwordCharactersSpecial[randomIndex]
       console.log(password);
-
+      window.alert("Your password is: " + password)
     }
     writePassword(password);
   }
