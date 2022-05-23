@@ -85,14 +85,14 @@ function passwordCriteriaHandler() {
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword(password) {
+/*function writePassword(password) {
 
   //var password = generatePassword();
   var passwordText = document.querySelector("#password");
-/* Currently unable to get full password to print, it only prints the last item */
+
   passwordText.value = password;
 
-};
+};*/
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", passwordCriteriaHandler);
