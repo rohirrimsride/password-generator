@@ -6,6 +6,9 @@ I want to be able to generate passwords that meet a specific criteria of complex
 that can be predetermined by selecting those criteria from prompts.
 
 
+## Screenshot
+
+
 
 ## Credits
 Starting code supplied.
